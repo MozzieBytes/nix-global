@@ -14,6 +14,7 @@
       programs.mdformat.enable = true;
       settings.global.excludes = [
         ".envrc"
+        "hardware-configuration.nix"
       ];
     };
     treefmtEval = treefmt-nix.lib.evalModule pkgs (fmtConf // fmtDefaults);
