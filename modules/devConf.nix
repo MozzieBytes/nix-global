@@ -28,10 +28,8 @@
       ++ treefmtPrograms;
   in
   {
-    fmt = {
-      formatter = treefmtEval.config.build.wrapper;
-      checks.formatting = treefmtEval.config.build.check self;
-    };
+    formatter = treefmtEval.config.build.wrapper;
+    fmtChecks = treefmtEval.config.build.check self;
     inherit corePackages;
   }
 )
