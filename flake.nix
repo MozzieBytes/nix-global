@@ -28,11 +28,10 @@
         devConf = import ./modules/devConf.nix (inputs // { inherit pkgs; }) { };
       in
         {
-        formatter = devConf.fmt.formatter;
-        checks.formatting = devConf.fmt.checks.formatting;
-        devShells.default = pkgs.mkShell {
-          buildInputs = devConf.corePackages;
-        };
-      }
-    );
+          formatter = devConf.fmt.formatter;
+          checks.formatting = devConf.fmt.checks.formatting;
+          devShells.default = pkgs.mkShell {
+            buildInputs = devConf.corePackages;
+          };
+        });
 }
