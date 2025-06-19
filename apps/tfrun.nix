@@ -1,4 +1,5 @@
 # This nix function declares multiple nix run profiles that can be used to run terraform commands against this project
+{ ... }: # workaround for importDir.nix
 (
   pkgs:
   (
