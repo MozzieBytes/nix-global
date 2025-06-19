@@ -7,31 +7,31 @@
   };
   outputs =
     inputs@{
-    self,
-    nixpkgs,
-    flake-utils,
-    treefmt-nix,
+      nixpkgs,
+      flake-utils,
+      ...
     }:
     let
-      importDir = import ./utils/importDir.nix;
+      importDir = import ./utils/importDir.nix inputs;
     in
-      {
-        nixosModules = {
-          modules = importDir ./modules;
-          apps = importDir ./apps;
-        };
-      }
+    {
+      nixosModules = {
+        modules = importDir ./modules;
+        apps = importDir ./apps;
+      };
+    }
     // flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = import nixpkgs { inherit system; };
-        devConf = import ./modules/devConf.nix (inputs // { inherit pkgs; }) { };
+        devConf = import ./modules/devConf.nix inputs pkgs { };
       in
-        {
-          formatter = devConf.formatter;
-          checks.formatting = devConf.fmtChecks;
-          devShells.default = pkgs.mkShell {
-            buildInputs = devConf.corePackages;
-          };
-        });
+      {
+        formatter = devConf.formatter;
+        checks.formatting = devConf.fmtChecks;
+        devShells.default = pkgs.mkShell {
+          buildInputs = devConf.corePackages;
+        };
+      }
+    );
 }
