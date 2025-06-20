@@ -13,25 +13,16 @@
     }:
     let
       importDir = import ./utils/importDir.nix inputs;
+      mkDevEnv = import ./utils/mkDevEnv.nix inputs { };
     in
     {
-      nixosModules = {
-        modules = importDir ./modules;
-        apps = importDir ./apps;
-      };
+      utils = importDir ./utils;
     }
-    // flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        devConf = import ./modules/devConf.nix inputs pkgs { };
-      in
-      {
-        formatter = devConf.formatter;
-        checks.formatting = devConf.fmtChecks;
+    // (mkDevEnv (
+      pkgs: corePackages: {
         devShells.default = pkgs.mkShell {
-          buildInputs = devConf.corePackages;
+          buildInputs = corePackages;
         };
       }
-    );
+    ));
 }
