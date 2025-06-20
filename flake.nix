@@ -12,11 +12,11 @@
       ...
     }:
     let
-      importDir = import ./utils/importDir.nix inputs;
-      mkDevEnv = import ./utils/mkDevEnv.nix inputs { };
+      importDir = import ./lib/importDir.nix inputs;
+      mkDevEnv = import ./lib/mkDevEnv.nix inputs { };
     in
     {
-      utils = importDir ./utils;
+      lib = importDir ./lib;
     }
     // (mkDevEnv (
       pkgs: corePackages: {
