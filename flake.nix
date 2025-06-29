@@ -8,7 +8,6 @@
   outputs =
     inputs@{
       nixpkgs,
-      flake-utils,
       ...
     }:
     let
