@@ -1,4 +1,4 @@
-# This nix function declares multiple nix run profiles that can be used to run terraform commands against this project
+# Create nix run profiles for opentofu commands against a target project
 { ... }:
 pkgs: src:
 let
