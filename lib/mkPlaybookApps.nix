@@ -20,7 +20,7 @@ builtins.listToAttrs (
     file:
     let
       play = builtins.replaceStrings [ ".yaml" ".yml" ] [ "" "" ] file;
-      playbook = ./playbooks + "/${file}";
+      playbook = playbookDir + "/${file}";
     in
     {
       name = play;
