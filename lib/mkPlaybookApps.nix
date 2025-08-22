@@ -28,4 +28,3 @@ builtins.listToAttrs (
     }
   ) playbooks
 )
-
